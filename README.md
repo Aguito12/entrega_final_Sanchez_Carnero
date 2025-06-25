@@ -76,7 +76,7 @@ Ruta: `/buscar-cliente/`
 
 1. Clonar el repositorio:
 ```bash
-git clone https://github.com/Aguito12/TuPrimeraPagina+SanchezCarnero.git
+git clone https://github.com/Aguito12/TuPrimeraPaginaSanchezCarnero.git
 ```
 
 2. Crear y activar un entorno virtual (opcional pero recomendado):
