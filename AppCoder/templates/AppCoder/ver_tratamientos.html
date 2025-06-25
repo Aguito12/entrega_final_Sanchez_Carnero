@@ -1,0 +1,22 @@
+{% extends "AppCoder/base.html" %}
+{% block title %}Tratamientos Disponibles{% endblock %}
+
+{% block contenido %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Tratamientos Disponibles</h2>
+    <div class="row">
+        {% for tratamiento in tratamientos %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ tratamiento.nombre }}</h5>
+                    <p class="card-text">{{ tratamiento.descripcion }}</p>
+                    <p class="card-text"><strong>Precio:</strong> ${{ tratamiento.precio }}</p>
+                    <p class="card-text"><strong>Profesional:</strong> {{ tratamiento.profesional.nombre }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

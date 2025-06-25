@@ -1,21 +1,43 @@
 from django.db import models
 
-class Curso(models.Model):
-    nombre = models.CharField(max_length=100)  # Campo string de 100 caracteres
-    camada = models.IntegerField()  # Campo entero
+class Profesional(models.Model):
+    nombre = models.CharField(max_length=100)
+    especialidad = models.CharField(max_length=100)
+    experiencia = models.IntegerField()
 
-class Estudiante(models.Model):
-    nombre = models.CharField(max_length=30)  # Campo string de 100 caracteres
-    apellido = models.CharField(max_length=30)  # Campo string de 100 caracteres
-    email = models.EmailField()  # Campo de email
+    def __str__(self):
+        return self.nombre
 
-class Profesor(models.Model):
-    nombre = models.CharField(max_length=30)  # Campo string de 30 caracteres
-    apellido = models.CharField(max_length=30)  # Campo string de 30 caracteres
-    email = models.EmailField()  # Campo de email
-    profesion = models.CharField(max_length=50)  # Campo string de 50 caracteres
+class Cliente(models.Model):
+    nombre = models.CharField(max_length=100)
+    email = models.EmailField()
+    telefono = models.CharField(max_length=20)
 
-class Entregable(models.Model):
-    nombre = models.CharField(max_length=100)  # Campo string de 100 caracteres
-    fechaDeEntrega = models.DateField()  # Campo de fecha
-    entregado = models.BooleanField()  # Campo booleano
+    def __str__(self):
+        return self.nombre
+
+class Tratamiento(models.Model):
+    nombre = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    precio = models.DecimalField(max_digits=8, decimal_places=2)
+    profesional = models.ForeignKey(Profesional, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.nombre} - ${self.precio}"
+
+class Reserva(models.Model):
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    tratamiento = models.ForeignKey(Tratamiento, on_delete=models.CASCADE)
+    fecha = models.DateField()
+    hora = models.TimeField()
+
+    def __str__(self):
+        return f"{self.cliente} - {self.tratamiento} ({self.fecha} {self.hora})"
+
+class Consulta(models.Model):
+    nombre = models.CharField(max_length=100)
+    email = models.EmailField()
+    mensaje = models.TextField()
+
+    def __str__(self):
+        return f"Consulta de {self.nombre}"

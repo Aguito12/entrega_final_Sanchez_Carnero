@@ -1,0 +1,21 @@
+{% extends "AppCoder/base.html" %}
+{% block title %}Profesionales{% endblock %}
+
+{% block contenido %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Profesionales Disponibles</h2>
+    <div class="row">
+        {% for profesional in profesionales %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ profesional.nombre }}</h5>
+                    <p class="card-text"><strong>Especialidad:</strong> {{ profesional.especialidad }}</p>
+                    <p class="card-text"><strong>Experiencia:</strong> {{ profesional.experiencia }} años</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

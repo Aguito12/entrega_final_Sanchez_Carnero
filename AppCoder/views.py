@@ -1,54 +1,60 @@
-from django.shortcuts import render
-from .models import Curso
-from .forms import CursoFormulario
-from django.http import HttpResponse
-
+from django.shortcuts import render, redirect
+from .models import Profesional, Cliente, Tratamiento
+from .forms import ProfesionalForm, ClienteForm, TratamientoForm, BusquedaClienteForm, ReservaForm, ConsultaForm
 
 def inicio(request):
-    return render(request, "AppCoder/index.html")
+    return render(request, "AppCoder/inicio.html")
 
-def cursos(request):
-    return render(request, "AppCoder/cursos.html")
+def agregar_profesional(request):
+    form = ProfesionalForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("Inicio")
+    return render(request, "AppCoder/formulario.html", {"form": form, "titulo": "Agregar Profesional"})
 
-def profesores(request):
-    return render(request, "AppCoder/profesores.html")
+def agregar_cliente(request):
+    form = ClienteForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("Inicio")
+    return render(request, "AppCoder/formulario.html", {"form": form, "titulo": "Agregar Cliente"})
 
-def estudiantes(request):
-    return render(request, "AppCoder/estudiantes.html")
+def agregar_tratamiento(request):
+    form = TratamientoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("Inicio")
+    return render(request, "AppCoder/formulario.html", {"form": form, "titulo": "Agregar Tratamiento"})
 
-def entregables(request):
-    return render(request, "AppCoder/entregables.html")
+def buscar_cliente(request):
+    form = BusquedaClienteForm(request.GET)
+    resultados = []
+    if form.is_valid():
+        nombre = form.cleaned_data['nombre']
+        resultados = Cliente.objects.filter(nombre__icontains=nombre)
+    return render(request, "AppCoder/busqueda.html", {"form": form, "resultados": resultados})
 
-def cursoFormulario2(request):
-      if request.method == "POST":
-            miFormulario = CursoFormulario(request.POST) # Aqui me llega la informacion del html
-            if miFormulario.is_valid():
-                  informacion = miFormulario.cleaned_data
-                  curso = Curso(nombre=informacion["curso"], camada=informacion["camada"])
-                  curso.save()
-                  return render(request, "AppCoder/cursos.html")
-      else:
-            miFormulario = CursoFormulario() # Formulario vacio para construir el html
- 
-      return render(request, "AppCoder/formulario/cursoFormulario2.html", {"miFormulario": miFormulario})
+def ver_tratamientos(request):
+    tratamientos = Tratamiento.objects.all()
+    return render(request, "AppCoder/ver_tratamientos.html", {"tratamientos": tratamientos})
 
+def ver_profesionales(request):
+    profesionales = Profesional.objects.all()
+    return render(request, "AppCoder/ver_profesionales.html", {"profesionales": profesionales})
 
-def busquedaCamada(request):
-    return render(request, "AppCoder/formulario/busquedaCamada.html")
+def hacer_reserva(request):
+    form = ReservaForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("Gracias")
+    return render(request, "AppCoder/formulario.html", {"form": form, "titulo": "Reservar Tratamiento"})
 
+def enviar_consulta(request):
+    form = ConsultaForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("Gracias")
+    return render(request, "AppCoder/formulario.html", {"form": form, "titulo": "Enviar Consulta"})
 
-def buscar(request):
-    if request.GET["camada"]:
-        #respuesta = f"Estoy buscando la camada nro: {request.GET['camada'] }"
-        camada = request.GET['camada']
-        # icontains es un filtro que se usa para buscar coincidencias en los campos de texto de la base de datos, 
-        # sin importar si las letras están en mayúsculas o minúsculas
-        cursos = Curso.objects.filter(camada__icontains=camada)
-
-        return render(request, "AppCoder/formulario/resultadosBusqueda.html", {"cursos": cursos, "camada": camada})
-
-    else:
-        respuesta = "No enviaste datos"
-
-        # No olvidar from django.http import HttpResponse
-        return HttpResponse(respuesta)
+def gracias(request):
+    return render(request, "AppCoder/gracias.html")

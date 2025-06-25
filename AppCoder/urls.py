@@ -1,15 +1,16 @@
 from django.urls import path
-from .views import cursos, profesores, estudiantes, entregables, inicio, cursoFormulario2, busquedaCamada, buscar
+from . import views
 
 urlpatterns = [
-    path('', inicio, name='inicio'),
-    path('cursos/', cursos, name='cursos'),
-    path('profesores/', profesores, name='profesores'),
-    path('estudiantes/', estudiantes, name='estudiantes'),
-    path('entregables/', entregables, name='entregables'),
-
-    path('cursoFormulario2/',cursoFormulario2,name='cursoFormulario2'),
-
-    path('busquedaCamada/', busquedaCamada, name="busquedaCamada"),
-    path('buscar/', buscar, name='buscar'),
-]
+    path('', views.inicio, name="Inicio"),
+    path('buscar-cliente/', views.buscar_cliente, name="BuscarCliente"),
+    path('tratamientos-disponibles/', views.ver_tratamientos, name="VerTratamientos"),
+    path('profesionales-disponibles/', views.ver_profesionales, name="VerProfesionales"),
+    path('reservar-tratamiento/', views.hacer_reserva, name="ReservarTratamiento"),
+    path('enviar-consulta/', views.enviar_consulta, name="EnviarConsulta"),
+    path('gracias/', views.gracias, name="Gracias"),
+    # Rutas protegidas (solo superusuario)
+    path('profesional/', views.agregar_profesional, name="Profesional"),
+    path('cliente/', views.agregar_cliente, name="Cliente"),
+    path('tratamiento/', views.agregar_tratamiento, name="Tratamiento"),
+] 

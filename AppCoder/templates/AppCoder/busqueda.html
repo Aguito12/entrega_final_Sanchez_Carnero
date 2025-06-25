@@ -1,0 +1,38 @@
+{% extends "AppCoder/base.html" %}
+{% block title %}Buscar Cliente{% endblock %}
+{% block contenido %}
+<div class="container my-5">
+    <div class="card shadow">
+        <div class="card-header bg-info text-white">
+            <h3 class="mb-0">Buscar Cliente</h3>
+        </div>
+        <div class="card-body">
+            <form method="get" class="row g-3 mb-4">
+                <div class="col-md-8">
+                    <label class="form-label">Nombre</label>
+                    {{ form.nombre }}
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                </div>
+            </form>
+
+            {% if resultados %}
+                <ul class="list-group">
+                    {% for cliente in resultados %}
+                        <li class="list-group-item">
+                            <strong>{{ cliente.nombre }}</strong> — {{ cliente.email }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">No se encontraron clientes.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
