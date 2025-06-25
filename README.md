@@ -82,7 +82,7 @@ git clone https://github.com/Aguito12/TuPrimeraPaginaSanchezCarnero.git
 2. Crear y activar un entorno virtual (opcional pero recomendado):
 ```bash
 python -m venv .venv
-source .venv\Scripts\activate
+.venv\Scripts\activate
 ```
 
 3. Instalar dependencias:
