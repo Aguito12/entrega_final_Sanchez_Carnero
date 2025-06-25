@@ -87,6 +87,7 @@ python -m venv .venv
 
 3. Instalar dependencias:
 ```bash
+cd TuPrimeraPaginaSanchezCarnero
 pip install -r requirements.txt
 ```
 
