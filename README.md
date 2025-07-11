@@ -429,5 +429,4 @@ Se incluye un video mostrando todas las funcionalidades en menos de 10 minutos.
 ## 👩‍💻 Autor
 
 - Nombre y Apellido: Maria Agostina Sanchez Carnero
-- GitHub: [Tu Usuario](https://github.com/tu-usuario)
 - Comisión: 78110-python
