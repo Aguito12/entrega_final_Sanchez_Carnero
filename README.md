@@ -36,8 +36,8 @@ Cuenta con:
 ### Clonar el repositorio
 
 ```powershell
-git clone https://github.com/tu-usuario/tu-repo.git
-cd tu-repo
+git clone https://github.com/Aguito12/entrega_final_Sanchez_Carnero.git
+cd TuPrimeraPaginaSanchezCarnero
 ```
 
 ### Crear entorno virtual
