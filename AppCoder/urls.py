@@ -13,4 +13,4 @@ urlpatterns = [
     path('profesional/', views.agregar_profesional, name="Profesional"),
     path('cliente/', views.agregar_cliente, name="Cliente"),
     path('tratamiento/', views.agregar_tratamiento, name="Tratamiento"),
-] 
+    ] 

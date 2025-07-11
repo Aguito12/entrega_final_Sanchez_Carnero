@@ -1,0 +1,18 @@
+{% extends "AppCoder/base.html" %}
+
+{% block title %}Eliminar Página{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <h1>Eliminar Página</h1>
+
+    <p>¿Estás seguro que querés eliminar la página <strong>{{ object.titulo }}</strong>?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a href="{% url 'detalle_pagina' object.pk %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
+

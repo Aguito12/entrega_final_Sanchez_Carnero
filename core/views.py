@@ -25,3 +25,6 @@ def probando_template(request):
                     "notas_malas": [6, 4, 2],
                 }
      return render(request,'core/template1.html',contexto)
+
+def about_view(request):
+    return render(request, 'paginas/about.html')

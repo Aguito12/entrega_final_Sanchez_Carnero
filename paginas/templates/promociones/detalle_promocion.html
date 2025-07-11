@@ -1,0 +1,26 @@
+{% extends "AppCoder/base.html" %}
+
+{% block title %}Detalle Promoción{% endblock %}
+
+{% block contenido %}
+<div class="container my-5">
+    <div class="card mx-auto" style="max-width: 800px; border-radius: 10px;">
+        <div class="card-header text-white" style="background-color: #b472d9;">
+            <h4 class="mb-0">{{ promocion.titulo }}</h4>
+        </div>
+        <div class="card-body">
+            {% if promocion.imagen %}
+                <img src="{{ promocion.imagen.url }}" class="img-fluid mb-3" alt="{{ promocion.titulo }}">
+            {% endif %}
+
+            <h5>{{ promocion.subtitulo }}</h5>
+
+            <p>{{ promocion.descripcion|safe }}</p>
+
+            <p><strong>Fecha:</strong> {{ promocion.fecha|date:"d/m/Y" }}</p>
+            <a href="{% url 'listado_promociones' %}" class="btn btn-secondary">Volver a Promociones</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

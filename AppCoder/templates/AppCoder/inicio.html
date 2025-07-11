@@ -1,26 +1,82 @@
 {% extends "AppCoder/base.html" %}
+{% load static %}
 {% block title %}Inicio{% endblock %}
 
 {% block contenido %}
-<div class="container py-5 text-center">
-    <h1 class="mb-4">Bienvenido al Centro de Estética</h1>
-    <p class="lead mb-5">Seleccioná la opción que necesites:</p>
-    <div class="row justify-content-center">
-        <div class="col-md-4 mb-3">
-            <a class="btn btn-outline-success w-100" href="{% url 'Cliente' %}">Registrarse como Cliente</a>
-        </div>
-        <div class="col-md-4 mb-3">
-            <a class="btn btn-outline-primary w-100" href="{% url 'VerTratamientos' %}">Ver Tratamientos</a>
-        </div>
-        <div class="col-md-4 mb-3">
-            <a class="btn btn-outline-primary w-100" href="{% url 'VerProfesionales' %}">Ver Profesionales</a>
-        </div>
-        <div class="col-md-4 mb-3">
-            <a class="btn btn-outline-warning w-100" href="{% url 'ReservarTratamiento' %}">Reservar Tratamiento</a>
-        </div>
-        <div class="col-md-4 mb-3">
-            <a class="btn btn-outline-info w-100" href="{% url 'EnviarConsulta' %}">Enviar Consulta</a>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+
+    .hero {
+        position: relative;
+        height: calc(100vh - 70px); /* Full screen menos navbar */
+        background: 
+            linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
+            url("{% static 'AppCoder/img/spa.jpg' %}") center/cover no-repeat;
+        background-color: #d8b4f8; /* Lila suave si la imagen no carga */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-content {
+        color: #4c2a85; /* lila oscuro */
+        z-index: 2;
+    }
+
+    .hero-content h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    }
+
+    .hero-content p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        color: #333;
+    }
+
+    .hero-content .btn {
+        margin: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+    }
+
+    .hero-content .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+</style>
+
+<div class="hero">
+    <div class="hero-content">
+        <h1>Bienvenido al Centro de Estética</h1>
+        <p>Seleccioná la opción que necesites:</p>
+        <div>
+            {% if user.is_authenticated %}
+                <a class="btn btn-success" href="{% url 'edit_profile' %}">Editar Perfil</a>
+            {% else %}
+                <a class="btn btn-success" href="{% url 'signup_cliente' %}">Registrarse como Cliente</a>
+            {% endif %}
+
+            <a class="btn btn-primary" href="{% url 'VerTratamientos' %}">Ver Tratamientos</a>
+            <a class="btn btn-primary" href="{% url 'VerProfesionales' %}">Ver Profesionales</a>
+            <a href="{% url 'listado_promociones' %}" class="btn btn-warning">Ver Promociones</a>
+
+            {% if user.is_authenticated %}
+                <a class="btn btn-warning" href="{% url 'ReservarTratamiento' %}">Reservar Tratamiento</a>
+                <a class="btn btn-info" href="{% url 'EnviarConsulta' %}">Enviar Consulta</a>
+            {% endif %}
         </div>
     </div>
 </div>
 {% endblock %}
+
+
+
+

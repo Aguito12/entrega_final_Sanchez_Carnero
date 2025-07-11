@@ -1,4 +1,6 @@
 from django.db import models
+from ckeditor.fields import RichTextField
+from django.utils import timezone   # ✅ IMPORT para default de fecha
 
 class Profesional(models.Model):
     nombre = models.CharField(max_length=100)
@@ -18,9 +20,12 @@ class Cliente(models.Model):
 
 class Tratamiento(models.Model):
     nombre = models.CharField(max_length=100)
-    descripcion = models.TextField()
+    subtitulo = models.CharField(max_length=150, blank=True)  # ✅ 2° CharField adicional
+    descripcion = RichTextField()  # ✅ texto enriquecido
     precio = models.DecimalField(max_digits=8, decimal_places=2)
     profesional = models.ForeignKey(Profesional, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='tratamientos/', blank=True, null=True)  # ✅ campo imagen
+    fecha = models.DateField(default=timezone.now)   # ✅ default agregado
 
     def __str__(self):
         return f"{self.nombre} - ${self.precio}"
@@ -41,3 +46,5 @@ class Consulta(models.Model):
 
     def __str__(self):
         return f"Consulta de {self.nombre}"
+
+

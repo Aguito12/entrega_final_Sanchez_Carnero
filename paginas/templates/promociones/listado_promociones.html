@@ -1,0 +1,41 @@
+{% extends "AppCoder/base.html" %}
+
+{% block title %}Listado de Promociones{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <h1>Listado de Promociones</h1>
+
+    {% if object_list %}
+        <div class="list-group mt-4">
+            {% for promocion in object_list %}
+                <div class="list-group-item">
+                    <h5 class="mb-1">{{ promocion.titulo }}</h5>
+                    <small class="text-muted">{{ promocion.fecha|date:"d/m/Y" }}</small>
+                    {% if promocion.subtitulo %}
+                        <p class="mb-1 mt-2">{{ promocion.subtitulo|truncatewords:20 }}</p>
+                    {% endif %}
+                    <a href="{% url 'detalle_promocion' promocion.pk %}" class="btn btn-sm btn-outline-primary mt-2">
+                        Leer más
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info mt-4">
+            No hay promociones aún.
+        </div>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        {% if user.is_staff or user.is_superuser %}
+            <a href="{% url 'crear_promocion' %}" class="btn btn-primary mt-4">Crear nueva Promoción</a>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
+
+
+
+
+

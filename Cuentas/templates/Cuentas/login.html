@@ -1,0 +1,17 @@
+{% extends "AppCoder/base.html" %}
+
+{% block contenido %}
+<h2>Login</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <label>Usuario:</label>
+    <input type="text" name="username">
+
+    <label>Contraseña:</label>
+    <input type="password" name="password">
+
+    <button type="submit">Ingresar</button>
+</form>
+
+{% endblock %}

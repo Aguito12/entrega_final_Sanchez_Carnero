@@ -1,22 +1,80 @@
 {% extends "AppCoder/base.html" %}
+{% load static %}
+
 {% block title %}Tratamientos Disponibles{% endblock %}
 
 {% block contenido %}
-<div class="container py-5">
-    <h2 class="mb-4 text-center">Tratamientos Disponibles</h2>
-    <div class="row">
+<style>
+    body {
+        background-color: #f8f0ff;
+    }
+
+    .tratamientos-title {
+        color: #b472d9;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+    }
+
+    .card-tratamiento {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        background: #fff;
+        transition: transform 0.3s;
+    }
+
+    .card-tratamiento:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-tratamiento .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-tratamiento h5 {
+        color: #6a1b9a;
+        font-weight: bold;
+    }
+
+    .price {
+        color: #4c2a85;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    .pro {
+        color: #b472d9;
+        font-weight: bold;
+    }
+
+    .emoji {
+        font-size: 1.5rem;
+        margin-right: 5px;
+    }
+</style>
+
+<div class="container my-5">
+    <h1 class="tratamientos-title">✨ Tratamientos Disponibles ✨</h1>
+    <div class="row g-4">
         {% for tratamiento in tratamientos %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
+        <div class="col-md-4">
+            <div class="card card-tratamiento h-100">
                 <div class="card-body">
-                    <h5 class="card-title">{{ tratamiento.nombre }}</h5>
+                    <h5 class="card-title">
+                        <span class="emoji">💆‍♀️</span> {{ tratamiento.nombre }}
+                    </h5>
                     <p class="card-text">{{ tratamiento.descripcion }}</p>
-                    <p class="card-text"><strong>Precio:</strong> ${{ tratamiento.precio }}</p>
-                    <p class="card-text"><strong>Profesional:</strong> {{ tratamiento.profesional.nombre }}</p>
+                    <p class="price">💲 {{ tratamiento.precio|floatformat:0 }},00</p>
+                    <p class="pro">👩 Profesional: {{ tratamiento.profesional.nombre }}</p>
                 </div>
             </div>
         </div>
+        {% empty %}
+            <p>No hay tratamientos disponibles en este momento.</p>
         {% endfor %}
     </div>
 </div>
 {% endblock %}
+

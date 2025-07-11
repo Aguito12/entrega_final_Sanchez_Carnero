@@ -1,0 +1,30 @@
+{% extends "AppCoder/base.html" %}
+{% load static %}
+
+{% block title %}Registrarse como Cliente{% endblock %}
+
+{% block contenido %}
+<div class="container my-5">
+    <div class="card mx-auto" style="max-width: 500px; border-radius: 15px;">
+        <div class="card-header text-white" style="background-color: #b472d9;">
+            <h4 class="mb-0">Registrarse como Cliente</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="mb-3">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger small">{{ field.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-success">Registrarse</button>
+                <a href="{% url 'Inicio' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
